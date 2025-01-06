@@ -1,0 +1,19 @@
+---
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "2400"
+  name: dev-demo
+spec:
+  forProvider:
+    version: "1.27"
+    region: ap-south-1
+    roleArnRef:
+      name: dev-demo-eks-cluster
+    vpcConfig:
+      - endpointPrivateAccess: false
+        endpointPublicAccess: true
+        subnetIdRefs:
+          - name: dev-private-ap-south-1a
+          - name: dev-private-ap-south-1b

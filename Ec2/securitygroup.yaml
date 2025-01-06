@@ -1,0 +1,17 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Allow TLS inbound traffic
+    name: aswarda
+    region: ap-south-1
+    tags:
+      Name: aswarda
+    vpcIdRef:
+      name: dev-main

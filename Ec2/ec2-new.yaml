@@ -1,0 +1,18 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  labels:
+    testing.upbound.io/example-name: test2
+  name: test2
+spec:
+  forProvider:
+    ami: ami-0fd05997b4dff7aac
+    instanceType: t2.micro
+    keyName: Terraform-Crossplane
+    networkInterface:
+      - deviceIndex: 0
+        networkInterfaceIdRef:
+          name: test3
+    region: ap-south-1
+    tags:
+      Name: CrossPlane-Ec2-2

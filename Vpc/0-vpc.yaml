@@ -1,0 +1,13 @@
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: dev-main
+spec:
+  forProvider:
+    region: ap-south-1
+    cidrBlock: 11.0.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    tags:
+      Name: dev-main

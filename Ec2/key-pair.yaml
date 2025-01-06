@@ -1,0 +1,8 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: KeyPair
+metadata:
+  name: example-new2
+spec:
+  forProvider:
+    publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0skysr4J9nTfk3lT2AlAt9rPx7Ma0Vm+FWWEg2rKBxaKu/LkGegfzUMmg2royeS3UF6u5ui+78lIQMuGAD0EXYGE9DlRCqqP01sumKb+QjJVHjgpX2CbviNU8EQn4fiJpShDWvRLZCz+u113ldSYh8asEuE63Pciz2l88oZZgTrLcZjwuti/nM39IrR0EpwchNY0g05sHAjZKZkRUB26Hp2ttxHV3QtPShj2omTu+2O/cQRLF5HEWmzAG1zSWtXxFhg955Q9jZPn96qvAQsDpt7zHICSXsD+jUKsu4fN9yrszMkUCSVfJSEDyh3N6ChEskG7TdbVlvJ1LbKtqetjF aswarda@ip-172-31-42-191.ap-south-1.compute.internal
+    region: ap-south-1

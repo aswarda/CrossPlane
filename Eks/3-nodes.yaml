@@ -1,0 +1,23 @@
+---
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: NodeGroup
+metadata:
+  name: general
+spec:
+  forProvider:
+    clusterNameRef:
+      name: dev-demo
+    nodeRoleArnRef:
+      name: dev-demo-eks-nodes
+    region: ap-south-1
+    capacityType: ON_DEMAND
+    instanceTypes: ["t3.medium"]
+    labels:
+      role: general
+    scalingConfig:
+      - desiredSize: 2
+        minSize: 2
+        maxSize: 10
+    subnetIdRefs:
+      - name: dev-private-ap-south-1a
+      - name: dev-private-ap-south-1b

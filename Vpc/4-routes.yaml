@@ -1,0 +1,98 @@
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: dev-private
+spec:
+  forProvider:
+    region: ap-south-1
+    tags:
+      Name: dev-private
+    vpcIdRef:
+      name: dev-main
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  name: dev-private
+spec:
+  forProvider:
+    destinationCidrBlock: 0.0.0.0/0
+    natGatewayIdRef:
+      name: dev-nat
+    region: ap-south-1
+    routeTableIdRef:
+      name: dev-private
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: dev-public
+spec:
+  forProvider:
+    region: ap-south-1
+    tags:
+      Name: dev-public
+    vpcIdRef:
+      name: dev-main
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  name: dev-public
+spec:
+  forProvider:
+    destinationCidrBlock: 0.0.0.0/0
+    gatewayIdRef:
+      name: dev-igw
+    region: ap-south-1
+    routeTableIdRef:
+      name: dev-public
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: dev-private-ap-south-1a
+spec:
+  forProvider:
+    region: ap-south-1
+    routeTableIdRef:
+      name: dev-private
+    subnetIdRef:
+      name: dev-private-ap-south-1a
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: dev-private-ap-south-1b
+spec:
+  forProvider:
+    region: ap-south-1
+    routeTableIdRef:
+      name: dev-private
+    subnetIdRef:
+      name: dev-private-ap-south-1b
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: dev-public-ap-south-1a
+spec:
+  forProvider:
+    region: ap-south-1
+    routeTableIdRef:
+      name: dev-public
+    subnetIdRef:
+      name: dev-public-ap-south-1a
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: dev-public-ap-south-1b
+spec:
+  forProvider:
+    region: ap-south-1
+    routeTableIdRef:
+      name: dev-public
+    subnetIdRef:
+      name: dev-public-ap-south-1b

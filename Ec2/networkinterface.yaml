@@ -1,0 +1,12 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  labels:
+    testing.upbound.io/example-name: test2
+  name: test2
+spec:
+  forProvider:
+    region: ap-south-1
+    subnetIdSelector:
+      matchLabels:
+        name: dev-public-ap-south-1a

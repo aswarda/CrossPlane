@@ -1,0 +1,72 @@
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: dev-private-ap-south-1a
+  labels:
+    name: dev-private-ap-south-1a
+spec:
+  forProvider:
+    availabilityZone: ap-south-1a
+    cidrBlock: 11.0.0.0/19
+    region: ap-south-1
+    tags:
+      Name: dev-private-ap-south-1a
+      kubernetes.io/role/internal-elb: "1"
+      kubernetes.io/cluster/dev-demo: "owned"
+    vpcIdRef:
+      name: dev-main
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: dev-private-ap-south-1b
+  labels:
+    name: dev-private-ap-south-1b
+spec:
+  forProvider:
+    availabilityZone: ap-south-1b
+    cidrBlock: 11.0.32.0/19
+    region: ap-south-1
+    tags:
+      Name: dev-private-ap-south-1b
+      kubernetes.io/role/internal-elb: "1"
+      kubernetes.io/cluster/dev-demo: "owned"
+    vpcIdRef:
+      name: dev-main
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: dev-public-ap-south-1a
+  labels:
+    name: dev-public-ap-south-1a
+spec:
+  forProvider:
+    availabilityZone: ap-south-1a
+    cidrBlock: 11.0.64.0/19
+    region: ap-south-1
+    tags:
+      Name: dev-public-ap-south-1a
+      kubernetes.io/role/elb: "1"
+      kubernetes.io/cluster/dev-demo: "owned"
+    vpcIdRef:
+      name: dev-main
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: dev-public-ap-south-1b
+  labels:
+    name: dev-public-ap-south-1b
+spec:
+  forProvider:
+    availabilityZone: ap-south-1b
+    cidrBlock: 11.0.96.0/19
+    region: ap-south-1
+    tags:
+      Name: dev-public-ap-south-1b
+      kubernetes.io/role/elb: "1"
+      kubernetes.io/cluster/dev-demo: "owned"
+    vpcIdRef:
+      name: dev-main
