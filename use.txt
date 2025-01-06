@@ -1,0 +1,52 @@
+First we need to setup an EKS cluster to use crossplane.
+
+so first deploy the eks and necessary infra, then connect to cluster and perform below operations
+
+#### Install Crossplane on Kubernetes
+helm repo add crossplane-stable https://charts.crossplane.io/stable
+helm repo update
+helm search repo crossplane
+helm install crossplane \
+    --namespace crossplane-system \
+    --create-namespace \
+    --version 1.13.2 \  
+    crossplane-stable/crossplane
+
+kubectl get pods -n crossplane-system
+kubectl get crds | grep crossplane.io
+
+#### Create S3 Bucket using Crossplane
+kubectl apply -f 0-crossplane/1-provider-aws-s3.yaml
+kubectl get providers
+kubectl get pods -n crossplane-system
+kubectl get crds | grep aws.upbound.io
+kubectl create secret generic aws-secret \
+    -n crossplane-system \
+    --from-file=creds=./aws-credentials.txt
+kubectl apply -f 0-crossplane/0-provider-aws-config.yaml
+kubectl apply -f 1-s3/0-my-bucket.yaml
+kubectl get bucket
+kubectl describe bucket
+kubectl get bucket
+kubectl apply -f 1-s3/1-my-bucket-versioning.yaml
+kubectl get bucketversioning
+
+
+
+
+####### Create AWS VPC using Crossplane
+kubectl apply -f 0-crossplane/2-provider-aws-ec2.yaml
+kubectl get providers
+kubectl apply -f 2-vpc
+kubectl get VPC
+kubectl get InternetGateway
+kubectl get RouteTableAssociation
+
+###### Create EKS Cluster using Crossplane
+kubectl apply -f 0-crossplane
+kubectl get providers
+kubectl apply -f 3-eks
+kubectl get Cluster
+kubectl get NodeGroup
+
+##### Reference URL --> https://github.com/antonputra/tutorials/blob/main/lessons/176/README.md
