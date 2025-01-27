@@ -1,0 +1,29 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: s3buckets.aws.crossplane.io  # Corrected the name to be plural + group
+spec:
+  group: aws.crossplane.io
+  names:
+    kind: S3Bucket
+    plural: s3buckets  # Must be plural form here
+    singular: s3bucket
+  claimNames:
+    kind: S3BucketClaim
+    plural: s3bucketclaims
+    singular: s3bucketclaim
+  versions:
+  - name: v1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              bucketName:
+                type: string
+              region:
+                type: string

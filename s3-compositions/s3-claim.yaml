@@ -1,0 +1,10 @@
+apiVersion: aws.crossplane.io/v1
+kind: S3BucketClaim  # This should match the kind from XRDS
+metadata:
+  name: managed-s3
+  namespace: default
+spec:
+  compositionRef:
+    name: s3bucket-composition  # Ensure this matches the Composition name
+  bucketName: "my-awesome-bucket"
+  region: "us-west-2"

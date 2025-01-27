@@ -1,0 +1,24 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: s3bucket-composition
+spec:
+  compositeTypeRef:
+    apiVersion: aws.crossplane.io/v1
+    kind: S3Bucket
+  resources:
+  - base:
+      apiVersion: s3.aws.upbound.io/v1beta1  # Corrected to use the right API version
+      kind: Bucket
+      spec:
+        providerConfigRef:
+          name: default  # Ensure this matches the provider config name
+        forProvider:
+          acl: private
+          region: us-east-1
+    name: s3bucket
+    patches:
+      - fromFieldPath: "spec.bucketName"
+        toFieldPath: "spec.forProvider.bucketName"
+      - fromFieldPath: "spec.region"
+        toFieldPath: "spec.forProvider.region"
