@@ -1,0 +1,44 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: rdsinstance-composition
+spec:
+  compositeTypeRef:
+    apiVersion: rds.aws.example/v1
+    kind: RDSInstance
+  resources:
+    - base:
+        apiVersion: rds.aws.upbound.io/v1beta2
+        kind: Instance
+        spec:
+          forProvider:
+            allocatedStorage: 20
+            autoGeneratePassword: true
+            autoMinorVersionUpgrade: true
+            backupRetentionPeriod: 14
+            backupWindow: "09:46-10:16"
+            dbName: example
+            engine: postgres
+            engineVersion: "16.6"
+            instanceClass: db.t3.micro
+            kmsKeyIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: sample-key
+            maintenanceWindow: "Mon:00:00-Mon:03:00"
+            passwordSecretRef:
+              name: example-dbinstance
+              key: password
+              namespace: upbound-system
+            publiclyAccessible: false
+            region: ap-south-1
+            skipFinalSnapshot: true
+            storageEncrypted: true
+            storageType: gp2
+            username: adminuser
+            vpcSecurityGroupIds:
+              - sg-0ef36ba98e1d40f37
+            dbSubnetGroupName: example-subnetgroup
+          writeConnectionSecretToRef:
+            name: example-dbinstance-out
+            namespace: default
+      name: rdsinstance

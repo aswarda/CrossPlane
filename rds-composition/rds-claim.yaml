@@ -1,0 +1,31 @@
+apiVersion: rds.aws.example/v1
+kind: RDSInstanceClaim
+metadata:
+  name: example-rdsinstance-claim
+spec:
+  compositionRef:
+    name: rdsinstance-composition
+  forProvider:
+    allocatedStorage: 20
+    instanceClass: db.t3.micro
+    engine: postgres
+    dbName: example
+    engineVersion: "16.6"
+    region: ap-south-1
+    username: adminuser
+    passwordSecretRef:
+      name: example-dbinstance
+      key: password
+    vpcSecurityGroupIds:
+      - sg-0ef36ba98e1d40f37
+    dbSubnetGroupName: example-subnetgroup
+    maintenanceWindow: Mon:00:00-Mon:03:00
+    backupRetentionPeriod: 14
+    backupWindow: "09:46-10:16"
+    autoMinorVersionUpgrade: true
+    skipFinalSnapshot: true
+    storageEncrypted: true
+    storageType: gp2
+    publiclyAccessible: false
+  writeConnectionSecretToRef:
+    name: example-dbinstance-secret  # The secret's name

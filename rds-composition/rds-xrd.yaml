@@ -1,0 +1,84 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: rdsinstances.rds.aws.example
+spec:
+  group: rds.aws.example
+  names:
+    kind: RDSInstance
+    plural: rdsinstances
+    shortNames:
+      - rdsinstance
+  claimNames:
+    kind: RDSInstanceClaim
+    plural: rdsinstanceclaims
+    shortNames:
+      - rdsinstanceclaim
+  defaultCompositionRef:
+    name: rdsinstance-composition
+  connectionSecretKeys:
+    - connectionString
+  versions:
+    - name: v1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                forProvider:
+                  type: object
+                  properties:
+                    allocatedStorage:
+                      type: integer
+                    instanceClass:
+                      type: string
+                    engine:
+                      type: string
+                    dbName:
+                      type: string
+                    engineVersion:
+                      type: string
+                    region:
+                      type: string
+                    username:
+                      type: string
+                    passwordSecretRef:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        key:
+                          type: string
+                    vpcSecurityGroupIds:
+                      type: array
+                      items:
+                        type: string
+                    dbSubnetGroupName:
+                      type: string
+                    maintenanceWindow:
+                      type: string
+                    backupRetentionPeriod:
+                      type: integer
+                    backupWindow:
+                      type: string
+                    autoMinorVersionUpgrade:
+                      type: boolean
+                    skipFinalSnapshot:
+                      type: boolean
+                    storageEncrypted:
+                      type: boolean
+                    storageType:
+                      type: string
+                    publiclyAccessible:
+                      type: boolean
+                    kmsKeyIdSelector:
+                      type: object
+                      properties:
+                        matchLabels:
+                          type: object
+                          additionalProperties:
+                            type: string
