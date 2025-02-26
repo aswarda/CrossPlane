@@ -49,6 +49,8 @@ jobs:
       with:
         image: aswarda/new123
         args: --file=Dockerfile
+    - name: Check if SARIF file exists
+      run: ls -lah snyk.sarif
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v3
       with:
