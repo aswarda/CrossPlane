@@ -26,7 +26,7 @@ jobs:
       run: docker push aswarda/new123:latest
     - name: Pull Docker image
       run: sudo docker pull aswarda/new123:latest
-    #- name: Delete Old docker container
-      #run: sudo docker rm -f cicd-pipeline-container || true
+    - name: Delete Old docker container
+      run: sudo docker rm -f cicd-pipeline-container || true
     - name: Run Docker Container
       run: sudo docker run -d -p 8080:8080 --name cicd-pipeline-container aswarda/new123
