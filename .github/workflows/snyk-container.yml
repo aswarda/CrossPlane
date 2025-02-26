@@ -51,6 +51,8 @@ jobs:
         args: --file=Dockerfile
     - name: Check if SARIF file exists
       run: ls -lah snyk.sarif
+    - name: Show SARIF content
+      run: cat snyk.sarif
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v3
       with:
