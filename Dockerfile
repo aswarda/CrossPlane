@@ -1,19 +1,17 @@
-FROM node:16
+# Use official Nginx image as the base
+FROM nginx:latest
 
-# Create app directory
-WORKDIR /usr/src/app
+# Remove default Nginx HTML files (optional)
+RUN rm -rf /usr/share/nginx/html/*
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available 123 (npm@5+)
-COPY package*.json ./
+# Copy your static website files to the Nginx root directory
+COPY index.html /usr/share/nginx/html/index.html
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+# Copy a custom Nginx configuration file (optional)
+#COPY nginx.conf /etc/nginx/nginx.conf
 
-# Bundle app source
-COPY . .
+# Expose port 80
+EXPOSE 80
 
-EXPOSE 8080
-CMD [ "node", "server.js" ]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
