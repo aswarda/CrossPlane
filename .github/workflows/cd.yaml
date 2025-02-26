@@ -2,9 +2,9 @@ name: CD Pipeline
 
 on:
   workflow_run:
-    workflows: [CI Pipeline]
+    workflows: ["CI Pipeline"]  # <-- Must match exactly with ci.yaml
     types: [completed]
-    branches: [aswarda]
+    conclusions: [success]
 
 jobs:
   deploy:
