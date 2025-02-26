@@ -21,12 +21,12 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       
     - name: Build the Docker image
-      run: docker build -t aswarda/today .
+      run: docker build -t aswarda/new123 .
     - name: Push to Dockerhub
-      run: docker push aswarda/today:latest
+      run: docker push aswarda/new123:latest
     - name: Pull Docker image
-      run: sudo docker pull aswarda/today:latest
+      run: sudo docker pull aswarda/new123:latest
     #- name: Delete Old docker container
       #run: sudo docker rm -f cicd-pipeline-container || true
     - name: Run Docker Container
-      run: sudo docker run -d -p 8080:8080 --name cicd-pipeline-container aswarda/today
+      run: sudo docker run -d -p 8080:8080 --name cicd-pipeline-container aswarda/new123
