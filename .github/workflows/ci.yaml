@@ -21,6 +21,6 @@ jobs:
       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       
     - name: Build the Docker image
-      run: docker build -t varsubham/cicd-pipeline .
+      run: docker build -t aswarda/today .
     - name: Push to Dockerhub
-      run: docker push varsubham/cicd-pipeline:latest
+      run: docker push aswarda/today:latest
